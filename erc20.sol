@@ -1,30 +1,30 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.24;
 
-// library Math {
-
-// }
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 
+//nhóm token erc20: token mint
+contract BonkBonk is ERC20 {
 
-//openzepplin
-// https://www.openzeppelin.com/contracts
+    address owner;
 
-//nodejs (js), => code frontend và backend 
-//golang, => code product liên quan đến backend service 
-//rust (code nền tảng blockchain)
-//solidity
-
-import "@openzeppelin/contracts/utils/math/Math.sol";
-
-contract MathTest {
-    using Math for uint;
-    function add(uint a, uint b) public pure returns (uint) {
-        (bool isAdd, uint c) = a.tryAdd(b);
-        require(isAdd, "add error");
-        return c;
+    constructor() ERC20("BonkBonk", "BONK") {
+        owner = msg.sender;
     }
-}
-//https://ui.shadcn.com/examples/dashboard
 
-//chỗ a.tryAdd(b), nếu mình có 2 using thư viện khác nhau thì hệ thống biết dùng thư viện nào vậy thầy
+    //Hàm tạo số lượng token, và yc chỉ người tạo contract mới đc mint
+    function mint(uint token) public {
+        require(owner == msg.sender);
+        _mint(msg.sender, token);
+    }
+    //hàm mint là hàm private trong thư viện, vì vậy để thực hiện mint,
+    //cần khai báo một hàm mint (kiểu public) để ghi đè lên hàm mint trong thư viện
+
+    //convert eth => bonk
+
+}
+
+//tính năng flash mint > dùng cho flash loan
+
+
